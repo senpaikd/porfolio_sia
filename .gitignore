@@ -23,6 +23,8 @@
 /storage/pail
 /vendor
 /.superpowers
+/.artifacts
+/artifacts
 Homestead.json
 Homestead.yaml
 Thumbs.db

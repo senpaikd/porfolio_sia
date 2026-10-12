@@ -63,7 +63,7 @@ class PortfolioModelTest extends TestCase
         $this->assertSame('Entry-level Web Developer', $settings->professional_title);
         $this->assertSame('kentdayola@gmail.com', $settings->email);
         $this->assertSame('https://github.com/senpaikd', $settings->github_url);
-        $this->assertNull($settings->linkedin_url);
+        $this->assertSame('https://www.linkedin.com/in/kent-dayola-0452b942b/', $settings->linkedin_url);
         $this->assertNull($settings->resume_path);
 
         $this->assertDatabaseHas('experiences', [
@@ -92,7 +92,7 @@ class PortfolioModelTest extends TestCase
         $this->assertSame(ProjectStatus::InDevelopment, $docuMind->status);
         $this->assertTrue($docuMind->is_published);
         $this->assertTrue($docuMind->is_featured);
-        $this->assertNull($docuMind->github_url);
+        $this->assertSame('https://github.com/senpaikd/documind', $docuMind->github_url);
         $this->assertSame('https://documind-bay-kappa.vercel.app/', $docuMind->live_url);
         $this->assertStringNotContainsString('Placeholder', $docuMind->short_description);
         $this->assertStringContainsString('privacy-conscious AI document assistant', $docuMind->short_description);
@@ -104,7 +104,7 @@ class PortfolioModelTest extends TestCase
         $this->assertSame(ProjectStatus::Completed, $helpDesk->status);
         $this->assertTrue($helpDesk->is_published);
         $this->assertTrue($helpDesk->is_featured);
-        $this->assertNull($helpDesk->github_url);
+        $this->assertSame('https://github.com/senpaikd/Helpdesk-ticketing', $helpDesk->github_url);
         $this->assertSame('https://helpdesk-ticketing.42web.io/', $helpDesk->live_url);
         $this->assertStringContainsString('secure Laravel support portal', $helpDesk->short_description);
         $this->assertEqualsCanonicalizing(

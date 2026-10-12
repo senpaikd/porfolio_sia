@@ -119,10 +119,9 @@ The seeded project visibility is deliberate:
 
 ## Personal information still to provide or review
 
-- LinkedIn profile URL
 - Résumé file for the public download link (the source résumé is not copied automatically)
-- DocuMind screenshots or main image and repository URL
-- HelpDesk Ticketing System screenshots or main image, repository URL, and confirmed completion date
+- DocuMind screenshots or main image
+- HelpDesk Ticketing System screenshots or main image and confirmed completion date
 - SeawiseHub live-demo URL, repository URL, confirmed project status/completion date, screenshots, and final SEO text
 - Main and gallery images for all projects
 - Whether SeawiseHub should eventually be featured and published
