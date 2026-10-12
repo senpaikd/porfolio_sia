@@ -124,8 +124,8 @@ The seeded project visibility is deliberate:
 - DocuMind screenshots or main image and repository URL
 - HelpDesk Ticketing System screenshots or main image, repository URL, and confirmed completion date
 - SeawiseHub live-demo URL, repository URL, confirmed project status/completion date, screenshots, and final SEO text
-- Main and gallery images for both projects
-- Whether either reviewed project should be featured and published
+- Main and gallery images for all projects
+- Whether SeawiseHub should eventually be featured and published
 - Optional skill proficiency labels and icons
 - Exact education start/end dates, if you want dates displayed instead of the résumé's graduation-year note
 - Any approved public location information
