@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Certification;
 use App\Models\Project;
 use App\Models\ProjectImage;
+use App\Observers\CertificationObserver;
 use App\Observers\ProjectImageObserver;
 use App\Observers\ProjectObserver;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Certification::observe(CertificationObserver::class);
         Project::observe(ProjectObserver::class);
         ProjectImage::observe(ProjectImageObserver::class);
 

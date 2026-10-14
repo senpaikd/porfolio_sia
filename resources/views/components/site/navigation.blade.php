@@ -6,6 +6,7 @@
             <a class="nav-link" href="{{ route('home') }}">Home</a>
             <a class="nav-link" href="{{ route('home') }}#about">About</a>
             <a class="nav-link" href="{{ route('projects.index') }}">Projects</a>
+            <a class="nav-link" href="{{ route('certifications.index') }}">Certifications</a>
             <a class="nav-link" href="{{ route('home') }}#experience">Experience</a>
             <a class="nav-link" href="{{ route('home') }}#contact">Contact</a>
             <button id="theme-toggle" type="button" class="theme-button" aria-label="Toggle color theme">Theme</button>

@@ -81,6 +81,20 @@
         </div>
     </section>
 
+    <section id="certifications" class="section-shell reveal">
+        <x-site.section-heading eyebrow="Credentials" title="Featured certifications" description="Selected learning achievements across software, IT support, and digital skills." />
+        @if ($featuredCertifications->isNotEmpty())
+            <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                @foreach ($featuredCertifications as $certification)
+                    <x-site.certification-card :certification="$certification" />
+                @endforeach
+            </div>
+        @else
+            <x-site.empty-state title="No featured certifications are published yet." message="Publish and feature a certificate from the admin dashboard to show it here." />
+        @endif
+        <a href="{{ route('certifications.index') }}" class="mt-8 inline-flex font-semibold" style="color: var(--cyan)">Browse all certifications <span aria-hidden="true" class="ml-2">→</span></a>
+    </section>
+
     <section id="contact" class="section-shell reveal">
         <div class="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
             <div>

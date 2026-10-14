@@ -1,6 +1,6 @@
 # Developer Portfolio
 
-A responsive Laravel portfolio with a secure Filament administration dashboard. Public visitors only see published projects; administrators manage projects, images, technologies, skills, experience, education, site settings, and contact messages without editing source code.
+A responsive Laravel portfolio with a secure Filament administration dashboard. Public visitors only see published content; administrators manage projects, images, technologies, skills, experience, education, certifications, site settings, and contact messages without editing source code.
 
 ## Stack and requirements
 
@@ -62,7 +62,7 @@ For a production asset build:
 npm run build
 ```
 
-Uploaded media is stored under `storage/app/public`. The `public/storage` link must exist anywhere the site serves uploaded images.
+Uploaded media is stored under `storage/app/public`. The `public/storage` link must exist anywhere the site serves project images or certificate PDFs.
 
 ## Administrator setup
 
@@ -89,6 +89,17 @@ Public registration is not installed. A user must have `is_admin = 1` to access 
 
 Project tables support searching, sorting, pagination, status filtering, published/featured filtering, editing, previewing published pages, reordering, and deletion.
 
+## Adding and publishing a certification
+
+1. Sign in at `/admin` and open **Certifications**.
+2. Choose **New certification**, then enter the exact certificate title, full issuer name, completion date, and display order.
+3. Upload the certificate as a PDF up to 5 MB. The original filename is not trusted; the application generates a safe filename on the public filesystem disk.
+4. Enable **Featured** to include the certificate in the homepage selection.
+5. Enable **Published** to show it publicly on `/certifications`.
+6. Use reorder mode or edit **Display order** to control presentation. Replacing or deleting a certificate safely removes its obsolete PDF.
+
+The certificate table supports searching, sorting, published/featured filtering, pagination, reordering, editing, and deletion. Only published certificates appear publicly.
+
 ## Tests and quality checks
 
 Tests use the dedicated `portfolio_testing` MySQL database configured in `phpunit.xml`. Change those non-secret local values if your MySQL account differs.
@@ -113,9 +124,11 @@ Only run `migrate:fresh` against a disposable local or test database because it 
 
 The seeded project visibility is deliberate:
 
-- **DocuMind** is published, featured, marked **In development**, and includes factual content verified from the supplied live deployment. No repository URL or project image has been supplied.
-- **HelpDesk Ticketing System** is published, featured, marked **Completed**, and links to the supplied live deployment. Its description is limited to features verified from the public registration and sign-in pages.
+- **DocuMind** is published, featured, marked **In development**, and links to the supplied GitHub repository and live deployment. No project image has been supplied.
+- **HelpDesk Ticketing System** is published, featured, marked **Completed**, and links to the supplied GitHub repository and live deployment. Its description is limited to features verified from the public registration and sign-in pages.
 - **SeawiseHub** remains unpublished and marked **In development** with résumé-based descriptions and technologies. No repository URL, live-demo URL, completion date, or images have been supplied.
+
+The seeder also imports the 14 supplied PDF certificates with their verified titles and completion dates. Six are featured on the homepage; all 14 are published on the dedicated certifications page. The tracked seed copies use sanitized filenames so a fresh deployment can populate Laravel's public storage without depending on files outside the repository.
 
 ## Personal information still to provide or review
 
@@ -128,8 +141,8 @@ The seeded project visibility is deliberate:
 - Optional skill proficiency labels and icons
 - Exact education start/end dates, if you want dates displayed instead of the résumé's graduation-year note
 - Any approved public location information
-
-The résumé also lists freeCodeCamp Responsive Web Design, freeCodeCamp JavaScript Algorithms and Data Structures, and Cisco Networking Academy CCNA – Introduction to Networks certifications. The current focused MVP has no certification content type, so these are not displayed rather than being forced into an unrelated section.
+- Verification URLs or credential IDs for certificates, if the issuing platforms provide them and you want them displayed later
+- Confirmation and source PDFs for any additional résumé certifications that were not among the 14 supplied files
 
 ## Security and deployment
 
@@ -150,6 +163,7 @@ The résumé also lists freeCodeCamp Responsive Web Design, freeCodeCamp JavaScr
 
 - Only published projects appear on the homepage, gallery, sitemap, or detail routes.
 - Featured projects must also be published.
+- Only published certifications appear on the certifications page, and only published featured certifications appear on the homepage.
 - Missing, draft, and newly unpublished slugs return 404.
 - External links are restricted to HTTP(S) and open with safe new-tab attributes.
 - Contact submissions are validated, stored for admin review, protected by a honeypot, and limited to three attempts per minute per normalized email/IP identity.

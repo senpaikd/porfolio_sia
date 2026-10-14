@@ -2,6 +2,7 @@
 
 namespace App\View\Models;
 
+use App\Models\Certification;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Project;
@@ -16,6 +17,7 @@ class HomePageData
         return [
             'settings' => SiteSetting::current(),
             'featuredProjects' => Project::query()->featured()->ordered()->with('technologies')->limit(6)->get(),
+            'featuredCertifications' => Certification::query()->featured()->ordered()->limit(6)->get(),
             'skills' => Skill::query()->where('is_published', true)->orderBy('display_order')->get(),
             'technologies' => Technology::query()->where('is_published', true)->orderBy('display_order')->get(),
             'experiences' => Experience::query()->where('is_published', true)->orderBy('display_order')->get(),

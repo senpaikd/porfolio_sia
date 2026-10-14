@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\ProjectStatus;
+use App\Models\Certification;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Project;
@@ -11,6 +12,7 @@ use App\Models\Skill;
 use App\Models\Technology;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PortfolioContentSeeder extends Seeder
@@ -24,6 +26,7 @@ class PortfolioContentSeeder extends Seeder
             $this->seedExperience();
             $this->seedEducation();
             $this->seedProjects($technologies);
+            $this->seedCertifications();
         });
     }
 
@@ -143,6 +146,43 @@ class PortfolioContentSeeder extends Seeder
             'is_published' => true,
             'display_order' => 0,
         ]);
+    }
+
+    private function seedCertifications(): void
+    {
+        $issuer = 'DICT-ITU DTC Initiative / Cisco Networking Academy';
+        $certifications = [
+            ['AI Fundamentals with IBM SkillsBuild', '2025-12-26', 'ai-fundamentals-with-ibm-skillsbuild.pdf', true],
+            ['Computer Hardware Basics', '2025-12-23', 'computer-hardware-basics.pdf', true],
+            ['IT Customer Support Basics', '2025-12-24', 'it-customer-support-basics.pdf', true],
+            ['Operating Systems Basics', '2025-12-22', 'operating-systems-basics.pdf', true],
+            ['Operating Systems Support', '2025-12-22', 'operating-systems-support.pdf', true],
+            ['English for IT 1', '2025-12-24', 'english-for-it-1.pdf', true],
+            ['English for IT 2', '2025-12-24', 'english-for-it-2.pdf', false],
+            ['Create Digital Content, Communicate and Collaborate Online', '2025-12-25', 'create-digital-content-communicate-collaborate-online.pdf', false],
+            ['Digital Awareness', '2025-12-25', 'digital-awareness.pdf', false],
+            ['Using Computer and Mobile Devices', '2025-12-26', 'using-computer-and-mobile-devices.pdf', false],
+            ['Creating Compelling Reports', '2025-12-25', 'creating-compelling-reports.pdf', false],
+            ['Discovering Entrepreneurship', '2025-12-24', 'discovering-entrepreneurship.pdf', false],
+            ['Launching a Business Venture', '2025-12-23', 'launching-a-business-venture.pdf', false],
+            ['Managing a Business Venture', '2025-12-23', 'managing-a-business-venture.pdf', false],
+        ];
+
+        foreach ($certifications as $displayOrder => [$title, $completionDate, $filename, $featured]) {
+            $source = database_path('seeders/files/certificates/'.$filename);
+            $path = 'certificates/'.$filename;
+
+            Storage::disk('public')->put($path, file_get_contents($source));
+
+            Certification::query()->updateOrCreate(['title' => $title], [
+                'issuer' => $issuer,
+                'completion_date' => $completionDate,
+                'certificate_path' => $path,
+                'is_featured' => $featured,
+                'is_published' => true,
+                'display_order' => $displayOrder,
+            ]);
+        }
     }
 
     /** @param array<string, Technology> $technologies */

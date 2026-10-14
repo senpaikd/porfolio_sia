@@ -20,6 +20,7 @@ class SitemapTest extends TestCase
             ->assertHeader('Content-Type', 'application/xml')
             ->assertSee(route('home'), false)
             ->assertSee(route('projects.index'), false)
+            ->assertSee(route('certifications.index'), false)
             ->assertSee(route('projects.show', $published), false)
             ->assertDontSee($draft->slug);
     }

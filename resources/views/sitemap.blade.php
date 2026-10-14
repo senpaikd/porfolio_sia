@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url><loc>{{ route('home') }}</loc></url>
     <url><loc>{{ route('projects.index') }}</loc></url>
+    <url><loc>{{ route('certifications.index') }}</loc></url>
     @foreach ($projects as $project)
         <url><loc>{{ route('projects.show', $project) }}</loc><lastmod>{{ $project->updated_at->toAtomString() }}</lastmod></url>
     @endforeach
